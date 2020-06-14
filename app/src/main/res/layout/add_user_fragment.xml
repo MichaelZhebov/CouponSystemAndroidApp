@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.main.view.AddUserFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.couponssystem.adminappforcs.ui.main.viewmodel.AddUserViewModel" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/size_15dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/chooseRole"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginBottom="@dimen/size_2dp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginBottom="@dimen/size_2dp"
+                android:hint="Enter Full Name"
+                tools:text="Some name"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginBottom="@dimen/size_2dp"
+                android:hint="Enter Email"
+                tools:text="Some email"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50dp"
+                android:layout_marginBottom="@dimen/size_2dp"
+                android:hint="Enter Password"
+                tools:text="Some password"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add User"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

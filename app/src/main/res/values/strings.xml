@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">CS Admin Panel</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="getEmpl">https://androidcrudtest.herokuapp.com/api/v1/employees</string>
+    <string name="employees_list">Employees List</string>
+    <string name="add_company">Add Company</string>
+    <string name="add_user">Add User</string>
+    <string name="user_details">Details</string>
+    <string name="coupon_details">Coupon Details</string>
+    <string name="id">ID:   </string>
+    <string name="last_name">Last Name:</string>
+    <string name="email">Email:</string>
+    <string name="couponsCount">Coupons count:</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="exit">Exit</string>
+    <string name="question_exit">Do you really want to exit?</string>
+    <string name="pos">Pos</string>
+    <string name="dot">.</string>
+    <string name="base_url">https://couponssystem.herokuapp.com</string>
+    <string name="error">Error occurred while getting request!</string>
+    <string name="error_auth">Bad credentials!</string>
+    <string name="error_auth_admin">You are not admin</string>
+    <string name="question_delete">Do you really want to delete?</string>
+    <string name="delete_success">Deleted success!</string>
+    <string name="loggedIn_success">Logged in success!</string>
+    <string name="add_success">Add success!</string>
+    <string name="valid_email">Please Enter a valid email!</string>
+    <string name="updated_success">Update success!</string>
+    <string name="some_name">Some Name</string>
+    <string name="some_email">Some Email</string>
+    <string name="welcome_splash">Welcome to Coupons System</string>
+    <string name="footer_splash">created by MZh</string>
+    <string name="sing_in_text">Please Sing In</string>
+    <string name="please_sing_in">Please Sign in</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="create_account">Create account</string>
+    <string name="companies_list">Companies List</string>
+    <string name="customers_list">Customers List</string>
+    <string name="coupons_list">Coupons List</string>
+    <string name="active">Active:</string>
+    <string name="name">Name:</string>
+    <string-array name="dropDown">
+        <item>Company</item>
+        <item>Customer</item>
+    </string-array>
+</resources>

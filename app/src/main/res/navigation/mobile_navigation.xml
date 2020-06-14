@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation.xml"
+    app:startDestination="@id/companyFragment">
+    <fragment
+        android:id="@+id/companyFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.company.CompanyListFragment"
+        android:label="company_fragment"
+        tools:layout="@layout/company_list_fragment" >
+        <action
+            android:id="@+id/action_companyFragment_to_companyDetailsFragment"
+            app:destination="@id/companyDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.customer.CustomerListFragment"
+        android:label="customer_fragment"
+        tools:layout="@layout/customer_list_fragment" >
+        <action
+            android:id="@+id/action_customerFragment_to_customerDetailsFragment"
+            app:destination="@id/customerDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/couponFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.coupon.CouponListFragment"
+        android:label="coupon_fragment"
+        tools:layout="@layout/coupon_list_fragment" >
+        <action
+            android:id="@+id/action_couponFragment_to_couponDetailsFragment"
+            app:destination="@id/couponDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.AddUserFragment"
+        android:label="add_user_fragment"
+        tools:layout="@layout/add_user_fragment" />
+    <fragment
+        android:id="@+id/companyDetailsFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.company.CompanyDetailsFragment"
+        android:label="user_details_fragment"
+        tools:layout="@layout/company_details_fragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerDetailsFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.customer.CustomerDetailsFragment"
+        android:label="CustomerDetailsFragment"
+        tools:layout="@layout/customer_details_fragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/couponDetailsFragment"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.coupon.CouponDetailsFragment"
+        android:label="CouponDetailsFragment"
+        tools:layout="@layout/coupon_details_fragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.couponssystem.adminappforcs.ui.main.view.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+</navigation>

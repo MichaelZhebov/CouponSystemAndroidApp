@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.couponssystem.adminappforcs.ui.main.viewmodel.customer.CustomerDetailsViewModel" />
+    </data>
+    <FrameLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.view.customer.CustomerDetailsFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/textLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/idText"
+                    style="@style/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{`ID: ` + viewmodel.user.id}"
+                    tools:text="ID: 1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/userNameText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:text="Name: " />
+
+                    <TextView
+                        android:id="@+id/userName"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:text="@={viewmodel.user.fullName}"
+                        tools:text=" Some name" />
+
+                    <EditText
+                        android:id="@+id/editUserName"
+                        style="@style/textView"
+                        android:text="@={viewmodel.user.fullName}"
+                        android:visibility="gone"
+                        tools:text=" Some" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/userEmail"
+                    style="@style/textView"
+                    android:text="@{`Email: ` + viewmodel.user.email}"
+                    tools:text="Email: Some email" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/userIsActive"
+                        style="@style/textView"
+                        android:layout_width="@dimen/size_100dp"
+                        android:text="@string/active"
+                        tools:text="Active: " />
+
+                    <Switch
+                        android:id="@+id/activeSwitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:checked="@={viewmodel.user.active}"
+                        android:clickable="false"
+                        tools:checked="true" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/userCouponsCount"
+                    style="@style/textView"
+                    android:text="@{`Coupons count: ` + viewmodel.user.coupons.size()}"
+                    tools:text="Coupons count: 123" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonsUpdDel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="4.0dip"
+                android:paddingTop="5.0dip"
+                android:paddingRight="4.0dip"
+                android:paddingBottom="1.0dip"
+                android:visibility="visible">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/update"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/update" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:backgroundTint="@color/red"
+                    android:tag=""
+                    android:text="@string/delete" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonsCanDel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="4.0dip"
+                android:paddingTop="5.0dip"
+                android:paddingRight="4.0dip"
+                android:paddingBottom="1.0dip"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:backgroundTint="@color/red"
+                    android:tag=""
+                    android:text="@string/cancel" />
+
+                <Button
+                    android:id="@+id/updateAllow"
+                    android:layout_width="0.0dip"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:backgroundTint="@color/colorAccent"
+                    android:text="@string/update" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

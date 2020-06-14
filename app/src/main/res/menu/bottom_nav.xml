@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/companyFragment"
+        android:icon="@drawable/ic_company"
+        android:title="Company"/>
+    <item
+        android:id="@+id/customerFragment"
+        android:icon="@drawable/ic_customer"
+        android:title="Customer"/>
+    <item
+        android:id="@+id/couponFragment"
+        android:icon="@drawable/ic_coupon"
+        android:title="Coupons"/>
+    <item
+        android:id="@+id/addUserFragment"
+        android:icon="@drawable/ic_add_user"
+        android:title="Add User"/>
+</menu>

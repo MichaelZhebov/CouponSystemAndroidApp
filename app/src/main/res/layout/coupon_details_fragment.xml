@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.couponssystem.adminappforcs.ui.main.viewmodel.coupon.CouponDetailsViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal"
+        tools:context=".ui.main.view.coupon.CouponDetailsFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:id="@+id/id"
+                    style="@style/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{`ID: ` + viewmodel.coupon.id}"
+                    tools:text="Coupon ID: 1" />
+
+                <TextView
+                    android:id="@+id/companyNameWithID"
+                    style="@style/textView"
+                    android:text="@{`Company Name: ` + viewmodel.coupon.companyName + `, ID: ` + viewmodel.coupon.companyId}"
+                    tools:text="Company name: Name, ID: " />
+
+                <TextView
+                    android:id="@+id/category"
+                    style="@style/textView"
+                    android:text="@{`Category: ` + viewmodel.coupon.category}"
+                    tools:text="Category: some text" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/textView"
+                    android:text="@{`Title: `+ viewmodel.coupon.title}"
+                    tools:text="Title: some text" />
+
+                <TextView
+                    android:id="@+id/description"
+                    style="@style/textView"
+                    android:text="@{`Description: ` + viewmodel.coupon.description}"
+                    tools:text="Description: some text" />
+
+                <TextView
+                    android:id="@+id/amount"
+                    style="@style/textView"
+                    android:text="@{`Amount: ` + viewmodel.coupon.amount}"
+                    tools:text="Amount: 123" />
+
+                <TextView
+                    android:id="@+id/price"
+                    style="@style/textView"
+                    android:text="@{`Price: ` + viewmodel.coupon.price + `$`}"
+                    tools:text="Price: 123.99$" />
+
+                <TextView
+                    android:id="@+id/startDate"
+                    style="@style/textView"
+                    android:text="@{`Start Date: ` + viewmodel.coupon.startDate}"
+                    tools:text="Start Date: 2020-01-15" />
+
+                <TextView
+                    android:id="@+id/endDate"
+                    style="@style/textView"
+                    android:text="@{`End Date: ` + viewmodel.coupon.endDate}"
+                    tools:text="End Date: 2397-01-21" />
+
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</layout>
