@@ -11,6 +11,13 @@ class ApiHelper (private val apiService: ApiService) {
 
     suspend fun getCompany(id : Long) = apiService.getCompany(id)
 
+    suspend fun addUser(user: User) {
+        if (user.role == "ROLE_COMPANY")
+            apiService.addCompany(user)
+        else if (user.role == "ROLE_CUSTOMER")
+            apiService.addCustomer(user)
+    }
+
     suspend fun deleteCompany(id : Long) = apiService.deleteCompany(id)
 
     suspend fun updateCompany(id : Long, user: User) = apiService.updateCompany(id, user)

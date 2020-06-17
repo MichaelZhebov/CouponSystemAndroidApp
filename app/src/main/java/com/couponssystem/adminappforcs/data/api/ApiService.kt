@@ -23,6 +23,9 @@ interface ApiService {
     @GET("$BASIC_URL_COMPANY/{id}")
     suspend fun getCompany(@Path("id") id : Long) : User
 
+    @POST(BASIC_URL_COMPANY)
+    suspend fun addCompany(@Body user: User) : User
+
     @DELETE("$BASIC_URL_COMPANY/{id}")
     suspend fun deleteCompany(@Path("id") id : Long) : User
 
@@ -34,6 +37,9 @@ interface ApiService {
 
     @GET("$BASIC_URL_CUSTOMER/{id}")
     suspend fun getCustomer(@Path("id") id : Long) : User
+
+    @POST(BASIC_URL_CUSTOMER)
+    suspend fun addCustomer(@Body user: User) : User
 
     @DELETE("$BASIC_URL_CUSTOMER/{id}")
     suspend fun deleteCustomer(@Path("id") id : Long) : User

@@ -10,22 +10,6 @@ class CustomerDetailsViewModel(private val mainRepository: MainRepository, priva
         mainRepository.getCustomer(id)
     }
 
-    fun getFullName() : String {
-        return user.fullName
-    }
-
-    fun setFullName(name : String) {
-        user.fullName = name
-    }
-
-    fun getActive() : Boolean {
-        return user.active
-    }
-
-    fun setActive(active : Boolean) {
-        user.active = active
-    }
-
     fun deleteCompany() {
         runBlocking {
             mainRepository.deleteCustomer(id)

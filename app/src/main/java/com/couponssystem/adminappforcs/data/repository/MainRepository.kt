@@ -27,4 +27,6 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun getCoupons() = apiHelper.getCoupons()
 
     suspend fun getCoupon(id: Long) = apiHelper.getCoupon(id)
+
+    suspend fun addUser(user: User) = apiHelper.addUser(user)
 }
