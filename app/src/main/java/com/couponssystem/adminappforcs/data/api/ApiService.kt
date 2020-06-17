@@ -1,6 +1,5 @@
 package com.couponssystem.adminappforcs.data.api
 
-import androidx.lifecycle.LiveData
 import com.couponssystem.adminappforcs.data.model.AuthBody
 import com.couponssystem.adminappforcs.data.model.Coupon
 import com.couponssystem.adminappforcs.data.model.JwtResponse
@@ -47,4 +46,6 @@ interface ApiService {
 
     @GET("$BASIC_URL_COUPON_DETAILS/{id}")
     suspend fun getCoupon(@Path("id") id : Long) : Coupon
+
+
 }

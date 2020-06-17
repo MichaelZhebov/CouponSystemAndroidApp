@@ -25,9 +25,6 @@ import kotlinx.android.synthetic.main.company_list_fragment.*
 
 class CompanyListFragment : Fragment() {
 
-    companion object {
-    }
-
     private lateinit var viewModel: CompanyListViewModel
     private lateinit var adapter : CompanyRecyclerAdapter
 
