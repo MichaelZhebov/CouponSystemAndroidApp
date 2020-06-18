@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.couponssystem.adminappforcs.R
@@ -17,6 +18,7 @@ import com.couponssystem.adminappforcs.data.api.NetworkService
 import com.couponssystem.adminappforcs.databinding.CustomerDetailsFragmentBinding
 import com.couponssystem.adminappforcs.ui.base.ViewModelFactory
 import com.couponssystem.adminappforcs.ui.main.viewmodel.customer.CustomerDetailsViewModel
+import com.couponssystem.adminappforcs.utils.Status
 import kotlinx.android.synthetic.main.customer_details_fragment.*
 
 class CustomerDetailsFragment : Fragment() {
@@ -28,12 +30,17 @@ class CustomerDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.title = "Customer Details"
-        val binding : CustomerDetailsFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.customer_details_fragment, container, false)
-        val id : Long = arguments?.let { CustomerDetailsFragmentArgs.fromBundle(
-            it
-        ).id}!!
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(ApiHelper(NetworkService.retrofitService()), id)).get(
-            CustomerDetailsViewModel::class.java)
+        val binding: CustomerDetailsFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.customer_details_fragment, container, false)
+        val id: Long = arguments?.let {
+            CustomerDetailsFragmentArgs.fromBundle(
+                it
+            ).id
+        }!!
+        viewModel = ViewModelProviders.of(
+            this,
+            ViewModelFactory(ApiHelper(NetworkService.retrofitService()), id)
+        ).get(CustomerDetailsViewModel::class.java)
         binding.viewmodel = viewModel
         return binding.root
     }
@@ -50,11 +57,25 @@ class CustomerDetailsFragment : Fragment() {
             showDialog()
         })
         updateAllow.setOnClickListener(View.OnClickListener {
-            viewModel.updateCompany()
-            userName.text = viewModel.user.fullName
-            disable()
-            Toast.makeText(this.context,
-                "Customer Updated", Toast.LENGTH_SHORT).show()
+            viewModel.updateCustomer().observe(this.viewLifecycleOwner, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            userName.text = viewModel.user.fullName
+                            disable()
+                            Toast.makeText(
+                                this.context,
+                                "Company Updated", Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        Status.ERROR -> {
+                            Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
+                        }
+                        Status.LOADING -> {
+                        }
+                    }
+                }
+            })
         })
     }
 
@@ -80,9 +101,11 @@ class CustomerDetailsFragment : Fragment() {
         builder.setMessage("Do you really want to delete this customer?")
 
         builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-            viewModel.deleteCompany()
-            Toast.makeText(this.context,
-                "Customer Deleted", Toast.LENGTH_SHORT).show()
+            viewModel.deleteCustomer()
+            Toast.makeText(
+                this.context,
+                "Customer Deleted", Toast.LENGTH_SHORT
+            ).show()
             findNavController().navigate(R.id.customerFragment)
         }
 

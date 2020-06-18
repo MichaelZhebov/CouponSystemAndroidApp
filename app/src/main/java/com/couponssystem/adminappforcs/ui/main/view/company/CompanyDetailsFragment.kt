@@ -1,8 +1,6 @@
 package com.couponssystem.adminappforcs.ui.main.view.company
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.couponssystem.adminappforcs.R
 import com.couponssystem.adminappforcs.data.api.ApiHelper
@@ -17,6 +18,7 @@ import com.couponssystem.adminappforcs.data.api.NetworkService
 import com.couponssystem.adminappforcs.databinding.CompanyDetailsFragmentBinding
 import com.couponssystem.adminappforcs.ui.base.ViewModelFactory
 import com.couponssystem.adminappforcs.ui.main.viewmodel.company.CompanyDetailsViewModel
+import com.couponssystem.adminappforcs.utils.Status
 import kotlinx.android.synthetic.main.company_details_fragment.*
 
 class CompanyDetailsFragment : Fragment() {
@@ -30,9 +32,11 @@ class CompanyDetailsFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = "Company Details"
         val binding: CompanyDetailsFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.company_details_fragment, container, false)
-        val id: Long = arguments?.let { CompanyDetailsFragmentArgs.fromBundle(
-            it
-        ).id }!!
+        val id: Long = arguments?.let {
+            CompanyDetailsFragmentArgs.fromBundle(
+                it
+            ).id
+        }!!
         viewModel = ViewModelProviders.of(
             this,
             ViewModelFactory(ApiHelper(NetworkService.retrofitService()), id)
@@ -44,7 +48,7 @@ class CompanyDetailsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         update.setOnClickListener(View.OnClickListener {
-            editeble()
+            enable()
         })
         cancel.setOnClickListener(View.OnClickListener {
             disable()
@@ -53,15 +57,29 @@ class CompanyDetailsFragment : Fragment() {
             showDialog()
         })
         updateAllow.setOnClickListener(View.OnClickListener {
-            viewModel.updateCompany()
-            userName.text = viewModel.user.fullName
-            disable()
-            Toast.makeText(this.context,
-                "Company Updated", Toast.LENGTH_SHORT).show()
+            viewModel.updateCompany().observe(this.viewLifecycleOwner, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            userName.text = viewModel.user.fullName
+                            disable()
+                            Toast.makeText(
+                                this.context,
+                                "Company Updated", Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        Status.ERROR -> {
+                            Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
+                        }
+                        Status.LOADING -> {
+                        }
+                    }
+                }
+            })
         })
     }
 
-    fun editeble() {
+    fun enable() {
         userName.visibility = View.GONE
         editUserName.visibility = View.VISIBLE
         activeSwitch.isClickable = true
@@ -83,10 +101,25 @@ class CompanyDetailsFragment : Fragment() {
         builder.setMessage("Do you really want to delete this company?")
 
         builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-            viewModel.deleteCompany()
-            Toast.makeText(this.context,
-                "Company Deleted", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.companyFragment)
+            viewModel.deleteCompany().observe(this.viewLifecycleOwner, Observer {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            Toast.makeText(
+                                this.context,
+                                "Company Deleted", Toast.LENGTH_SHORT
+                            ).show()
+                            findNavController().navigate(R.id.companyFragment)
+                        }
+                        Status.ERROR -> {
+                            Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
+                        }
+                        Status.LOADING -> {
+                        }
+                    }
+                }
+            })
+
         }
 
         builder.setNegativeButton(android.R.string.no) { dialog, which ->

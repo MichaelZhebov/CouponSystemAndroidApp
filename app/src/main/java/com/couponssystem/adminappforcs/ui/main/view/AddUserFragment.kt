@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.couponssystem.adminappforcs.R
 import com.couponssystem.adminappforcs.data.api.ApiHelper
@@ -19,6 +20,7 @@ import com.couponssystem.adminappforcs.data.api.NetworkService
 import com.couponssystem.adminappforcs.databinding.AddUserFragmentBinding
 import com.couponssystem.adminappforcs.ui.base.ViewModelFactory
 import com.couponssystem.adminappforcs.ui.main.viewmodel.AddUserViewModel
+import com.couponssystem.adminappforcs.utils.Status
 import kotlinx.android.synthetic.main.add_user_fragment.*
 
 class AddUserFragment : Fragment() {
@@ -45,18 +47,26 @@ class AddUserFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         setupUI()
         addUser.setOnClickListener(View.OnClickListener {
-            if (checkDataEntered()) {
+            if (checkDataEntered())
                 addUser()
-                Toast.makeText(
-                    this.context,
-                    "User Added", Toast.LENGTH_SHORT
-                ).show()
-            }
         })
     }
 
     private fun addUser() {
-        viewModel.addUser()
+        viewModel.addUser().observe(this.viewLifecycleOwner, Observer {
+            it?.let { resourse ->
+                when (resourse.status) {
+                    Status.SUCCESS -> {
+                        Toast.makeText(this.context, "User Added", Toast.LENGTH_SHORT).show()
+                    }
+                    Status.ERROR -> {
+                        Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                    }
+                }
+            }
+        })
     }
 
     private fun checkDataEntered(): Boolean {
@@ -69,7 +79,7 @@ class AddUserFragment : Fragment() {
             userEmail.setError("Email is required")
             checked = false
         }
-        if (!TextUtils.isEmpty(userEmail.text) && !Patterns.EMAIL_ADDRESS.matcher(userEmail.text)
+        if (!TextUtils.isEmpty(userEmail.text) && !Patterns.EMAIL_ADDRESS.matcher(userEmail.text.toString())
                 .matches()
         ) {
             userEmail.setError("Enter valid email")

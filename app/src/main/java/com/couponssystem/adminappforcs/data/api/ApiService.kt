@@ -53,5 +53,4 @@ interface ApiService {
     @GET("$BASIC_URL_COUPON_DETAILS/{id}")
     suspend fun getCoupon(@Path("id") id : Long) : Coupon
 
-
 }

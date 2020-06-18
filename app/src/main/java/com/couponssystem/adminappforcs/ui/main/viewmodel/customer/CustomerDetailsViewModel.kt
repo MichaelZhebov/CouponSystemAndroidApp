@@ -1,7 +1,10 @@
 package com.couponssystem.adminappforcs.ui.main.viewmodel.customer
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import com.couponssystem.adminappforcs.data.repository.MainRepository
+import com.couponssystem.adminappforcs.utils.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 
 class CustomerDetailsViewModel(private val mainRepository: MainRepository, private val id : Long) : ViewModel() {
@@ -10,15 +13,21 @@ class CustomerDetailsViewModel(private val mainRepository: MainRepository, priva
         mainRepository.getCustomer(id)
     }
 
-    fun deleteCompany() {
-        runBlocking {
-            mainRepository.deleteCustomer(id)
+    fun deleteCustomer() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = mainRepository.deleteCustomer(id)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 
-    fun updateCompany() {
-        runBlocking {
-            mainRepository.updateCustomer(id, user)
+    fun updateCustomer() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = mainRepository.updateCustomer(id, user = user)))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
 }
