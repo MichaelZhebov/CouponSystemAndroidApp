@@ -3,91 +3,267 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewmodel"
-            type="com.couponssystem.adminappforcs.ui.main.viewmodel.coupon.CouponDetailsViewModel" />
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="horizontal"
         tools:context=".ui.main.view.coupon.CouponDetailsFragment">
 
+        <ProgressBar
+            android:id="@+id/progressBarCouponDetails"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/mainLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/id"
+                    android:id="@+id/idText"
                     style="@style/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/id"
+                    tools:text="ID: " />
+
+                <TextView
+                    android:id="@+id/couponId"
+                    style="@style/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    tools:text="1" />
+
+            </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{`ID: ` + viewmodel.coupon.id}"
-                    tools:text="Coupon ID: 1" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/companyNameWithID"
-                    style="@style/textView"
-                    android:text="@{`Company Name: ` + viewmodel.coupon.companyName + `, ID: ` + viewmodel.coupon.companyId}"
-                    tools:text="Company name: Name, ID: " />
+                    <TextView
+                        android:id="@+id/companyNameText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company_name"
+                        tools:text="Company Name: " />
 
-                <TextView
-                    android:id="@+id/category"
-                    style="@style/textView"
-                    android:text="@{`Category: ` + viewmodel.coupon.category}"
-                    tools:text="Category: some text" />
+                    <TextView
+                        android:id="@+id/couponCompanyName"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="Some Name" />
 
-                <TextView
-                    android:id="@+id/title"
-                    style="@style/textView"
-                    android:text="@{`Title: `+ viewmodel.coupon.title}"
-                    tools:text="Title: some text" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/description"
-                    style="@style/textView"
-                    android:text="@{`Description: ` + viewmodel.coupon.description}"
-                    tools:text="Description: some text" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/amount"
-                    style="@style/textView"
-                    android:text="@{`Amount: ` + viewmodel.coupon.amount}"
-                    tools:text="Amount: 123" />
+                    <TextView
+                        android:id="@+id/companyIdText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/company_id"
+                        tools:text="Company ID: " />
 
-                <TextView
-                    android:id="@+id/price"
-                    style="@style/textView"
-                    android:text="@{`Price: ` + viewmodel.coupon.price + `$`}"
-                    tools:text="Price: 123.99$" />
+                    <TextView
+                        android:id="@+id/couponCompanyId"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="1" />
 
-                <TextView
-                    android:id="@+id/startDate"
-                    style="@style/textView"
-                    android:text="@{`Start Date: ` + viewmodel.coupon.startDate}"
-                    tools:text="Start Date: 2020-01-15" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/endDate"
-                    style="@style/textView"
-                    android:text="@{`End Date: ` + viewmodel.coupon.endDate}"
-                    tools:text="End Date: 2397-01-21" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/CategoryText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category"
+                        tools:text="Category: " />
+
+                    <TextView
+                        android:id="@+id/couponCategory"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="Some Category" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/titleText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/title"
+                        tools:text="Title: " />
+
+                    <TextView
+                        android:id="@+id/couponTitle"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="Some title" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/descriptionText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description"
+                        tools:text="Description: " />
+
+                    <TextView
+                        android:id="@+id/couponDescription"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="Some description" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/amountText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/amount"
+                        tools:text="Amount: " />
+
+                    <TextView
+                        android:id="@+id/couponAmount"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="100" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/priceText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        tools:text="Price: " />
+
+                    <TextView
+                        android:id="@+id/couponPrice"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="100.00" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/startDateText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/start_date"
+                        tools:text="Start Date: " />
+
+                    <TextView
+                        android:id="@+id/couponStartDate"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="2020-10-05" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/endDateText"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/end_date"
+                        tools:text="End Date: " />
+
+                    <TextView
+                        android:id="@+id/couponEndDate"
+                        style="@style/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        tools:text="2020-11-05" />
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </FrameLayout>

@@ -4,14 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.couponssystem.adminappforcs.data.api.ApiHelper
 import com.couponssystem.adminappforcs.data.repository.MainRepository
-import com.couponssystem.adminappforcs.ui.main.viewmodel.*
+import com.couponssystem.adminappforcs.ui.main.viewmodel.AddUserViewModel
+import com.couponssystem.adminappforcs.ui.main.viewmodel.LoginViewModel
+import com.couponssystem.adminappforcs.ui.main.viewmodel.MainViewModel
 import com.couponssystem.adminappforcs.ui.main.viewmodel.company.CompanyDetailsViewModel
 import com.couponssystem.adminappforcs.ui.main.viewmodel.company.CompanyListViewModel
 import com.couponssystem.adminappforcs.ui.main.viewmodel.coupon.CouponDetailsViewModel
 import com.couponssystem.adminappforcs.ui.main.viewmodel.coupon.CouponListViewModel
 import com.couponssystem.adminappforcs.ui.main.viewmodel.customer.CustomerDetailsViewModel
 import com.couponssystem.adminappforcs.ui.main.viewmodel.customer.CustomerListViewModel
-import java.lang.IllegalArgumentException
 
 class ViewModelFactory(private val apiHelper: ApiHelper, private val id: Long) :
     ViewModelProvider.Factory {

@@ -21,6 +21,7 @@ import com.couponssystem.adminappforcs.ui.main.viewmodel.customer.CustomerDetail
 import com.couponssystem.adminappforcs.utils.Status
 import kotlinx.android.synthetic.main.customer_details_fragment.*
 
+
 class CustomerDetailsFragment : Fragment() {
 
     private lateinit var viewModel: CustomerDetailsViewModel
@@ -47,7 +48,9 @@ class CustomerDetailsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupObservers()
         update.setOnClickListener(View.OnClickListener {
+            editUserName.setText(viewModel.user.fullName)
             editeble()
         })
         cancel.setOnClickListener(View.OnClickListener {
@@ -77,6 +80,35 @@ class CustomerDetailsFragment : Fragment() {
                 }
             })
         })
+    }
+
+    private fun setupObservers() {
+        viewModel.getCustomer().observe(this.viewLifecycleOwner, Observer {
+            it?.let { resourse ->
+                when (resourse.status) {
+                    Status.SUCCESS -> {
+                        userId.text = resourse.data?.id.toString()
+                        userName.text = resourse.data?.fullName
+                        userEmail.text = resourse.data?.email
+                        activeSwitch.isChecked = resourse.data?.active!!
+                        userCouponsCount.text = resourse.data.coupons.size.toString()
+                        viewModel.user = resourse.data
+                        changeVisibility()
+                    }
+                    Status.ERROR -> {
+                        changeVisibility()
+                        Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        changeVisibility()
+                    }
+                }
+            }
+        })
+    }
+
+    private fun changeVisibility() {
+        progressBarCustomerDetails.visibility = View.GONE
     }
 
     fun editeble() {

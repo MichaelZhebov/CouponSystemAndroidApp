@@ -75,18 +75,15 @@ class CouponListFragment : Fragment() {
             it?.let { resourse ->
                 when (resourse.status) {
                     Status.SUCCESS -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
+                        changeVisibility()
                         resourse.data?.let { coupons -> retrieveList(coupons) }
                     }
                     Status.ERROR -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
+                        changeVisibility()
                         Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
+                        changeVisibility()
                     }
                 }
             }
@@ -98,5 +95,9 @@ class CouponListFragment : Fragment() {
             addCoupon(coupons)
             notifyDataSetChanged()
         }
+    }
+
+    private fun changeVisibility() {
+        progressBar.visibility = View.GONE
     }
 }

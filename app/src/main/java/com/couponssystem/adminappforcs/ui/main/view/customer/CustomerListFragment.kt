@@ -75,18 +75,15 @@ class CustomerListFragment : Fragment() {
             it?.let { resourse ->
                 when (resourse.status) {
                     Status.SUCCESS -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
+                        changeVisibility()
                         resourse.data?.let { users -> retrieveList(users) }
                     }
                     Status.ERROR -> {
-                        recyclerView.visibility = View.VISIBLE
-                        progressBar.visibility = View.GONE
+                        changeVisibility()
                         Toast.makeText(this.context, it.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
-                        progressBar.visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
+                        changeVisibility()
                     }
                 }
             }
@@ -98,6 +95,10 @@ class CustomerListFragment : Fragment() {
             addUsers(users)
             notifyDataSetChanged()
         }
+    }
+
+    private fun changeVisibility() {
+        progressBar.visibility = View.GONE
     }
 
 }
